@@ -86,7 +86,7 @@ export default function SearchContent(props) {
                   {data.images.slice(0, 4).map((imageData, imgIndex) => {
                     return (
                       <TouchableOpacity
-                        onPress={() => props.data(imageData)}
+                        onPressIn={() => props.data(imageData)}
                         onPressOut={() => props.data(null)}
                         style={{ paddingBottom: 2 }}
                       >
@@ -99,7 +99,7 @@ export default function SearchContent(props) {
                   })}
                 </View>
                 <TouchableOpacity
-                  onPress={() => props.data(data.images[5])}
+                  onPressIn={() => props.data(data.images[5])}
                   onPressOut={() => props.data(null)}
                   style={{ marginLeft: 2 }}
                 >
@@ -118,7 +118,7 @@ export default function SearchContent(props) {
                 }}
               >
                 <TouchableOpacity
-                  onPress={() => props.data(data.images[2])}
+                  onPressIn={() => props.data(data.images[2])}
                   onPressOut={() => props.data(null)}
                   style={{ paddingRight: 2 }}
                 >
@@ -138,7 +138,7 @@ export default function SearchContent(props) {
                   {data.images.slice(0, 4).map((imageData, imgIndex) => {
                     return (
                       <TouchableOpacity
-                        onPress={() => props.data(imageData)}
+                        onPressIn={() => props.data(imageData)}
                         onPressOut={() => props.data(null)}
                         style={{ paddingBottom: 2 }}
                       >
