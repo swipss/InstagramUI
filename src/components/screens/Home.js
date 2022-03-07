@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, ScrollView } from "react-native";
+import { View, Text, StatusBar, ScrollView, SafeAreaView } from "react-native";
 import React from "react";
 import { FontAwesome, Feather } from "@expo/vector-icons";
 import Stories from "../screenComponents/Stories";
@@ -6,7 +6,7 @@ import Post from "../screenComponents/Post";
 
 export default function Home() {
   return (
-    <View style={{ backgroundColor: "white", height: "100%" }}>
+    <SafeAreaView style={{ backgroundColor: "white", height: "100%" }}>
       <StatusBar
         backgroundColor={"white"}
         barStyle={"dark-content"}
@@ -32,6 +32,6 @@ export default function Home() {
         <Stories />
         <Post />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
