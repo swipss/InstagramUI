@@ -16,6 +16,7 @@ import Reels from "./src/components/screens/Reels";
 import Activity from "./src/components/screens/Activity";
 import Profile from "./src/components/screens/Profile";
 import Status from "./src/components/screenComponents/Status";
+import FriendProfile from "./src/components/screens/FriendProfile";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -122,6 +123,7 @@ export default function App() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="BottomTabScreen" component={BottomTabScreen} />
         <Stack.Screen name="Status" component={Status} />
+        <Stack.Screen name="FriendProfile" component={FriendProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
