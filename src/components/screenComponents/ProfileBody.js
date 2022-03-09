@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { Ionicons, Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 export const ProfileBody = ({
   name,
   accountName,
@@ -11,56 +12,114 @@ export const ProfileBody = ({
 }) => {
   return (
     <View>
-      {accountName ? null : (
+      {accountName ? (
         <View
           style={{
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "space-around",
-            paddingVertical: 20,
+            justifyContent: "space-between",
           }}
         >
-          <View style={{ alignItems: "center" }}>
-            <Image
-              source={profileImage}
-              style={{
-                width: 80,
-                height: 80,
-                resizeMode: "cover",
-                borderRadius: 100,
-              }}
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              {accountName}
+            </Text>
+            <Feather
+              name="chevron-down"
+              size={20}
+              style={{ paddingHorizontal: 5, opacity: 0.5 }}
             />
-            <Text style={{ paddingVertical: 5, fontWeight: "bold" }}>
-              {name}
-            </Text>
           </View>
-          <View style={{ alignItems: "center" }}>
-            <Text style={{ fontWeight: "bold", fontSize: 18 }}>{post}</Text>
-            <Text>Posts</Text>
-          </View>
-          <View style={{ alignItems: "center" }}>
-            <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-              {followers}
-            </Text>
-            <Text>Followers</Text>
-          </View>
-          <View style={{ alignItems: "center" }}>
-            <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-              {following}
-            </Text>
-            <Text>Following</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Feather
+              name="plus-square"
+              size={25}
+              style={{ paddingHorizontal: 5 }}
+            />
+            <Feather name="menu" size={25} />
           </View>
         </View>
-      )}
+      ) : null}
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-around",
+          paddingVertical: 20,
+        }}
+      >
+        <View style={{ alignItems: "center" }}>
+          <Image
+            source={profileImage}
+            style={{
+              width: 80,
+              height: 80,
+              resizeMode: "cover",
+              borderRadius: 100,
+            }}
+          />
+          <Text style={{ paddingVertical: 5, fontWeight: "bold" }}>{name}</Text>
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <Text style={{ fontWeight: "bold", fontSize: 18 }}>{post}</Text>
+          <Text>Posts</Text>
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <Text style={{ fontWeight: "bold", fontSize: 18 }}>{followers}</Text>
+          <Text>Followers</Text>
+        </View>
+        <View style={{ alignItems: "center" }}>
+          <Text style={{ fontWeight: "bold", fontSize: 18 }}>{following}</Text>
+          <Text>Following</Text>
+        </View>
+      </View>
     </View>
   );
 };
 
-export const ProfileButtons = ({ id }) => {
+export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
+  const navigation = useNavigation();
   const [follow, setFollow] = useState(follow);
   return (
     <>
-      {id === 0 ? null : (
+      {id === 0 ? (
+        <View
+          style={{
+            width: "100%",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+            paddingVertical: 5,
+          }}
+        >
+          <TouchableOpacity
+            onPress={() =>
+              navigation.push("EditProfile", {
+                name: name,
+                accountName: accountName,
+                profileImage: profileImage,
+              })
+            }
+            style={{ width: "100%" }}
+          >
+            <View
+              style={{
+                width: "100%",
+                height: 35,
+                borderRadius: 5,
+                borderColor: "#dedede",
+                borderWidth: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontWeight: "bold", opacity: 0.8 }}>
+                Edit Profile
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      ) : (
         <View
           style={{
             width: "100%",
@@ -85,7 +144,12 @@ export const ProfileButtons = ({ id }) => {
                 alignItems: "center",
               }}
             >
-              <Text style={{ color: follow ? "black" : "white" }}>
+              <Text
+                style={{
+                  color: follow ? "black" : "white",
+                  fontWeight: "bold",
+                }}
+              >
                 {follow ? "Following" : "Follow"}
               </Text>
             </View>
@@ -101,7 +165,7 @@ export const ProfileButtons = ({ id }) => {
               borderRadius: 5,
             }}
           >
-            <Text>Message</Text>
+            <Text style={{ fontWeight: "bold" }}>Message</Text>
           </View>
           <View
             style={{
